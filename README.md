@@ -1,2 +1,2 @@
-# courses
+# Courses
 Python courses
