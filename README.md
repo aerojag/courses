@@ -1,2 +1,2 @@
 # Courses
-Python courses
+Programming courses
