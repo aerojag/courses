@@ -1,2 +1,2 @@
 # Courses
-Programming courses
+Programming & machine learning courses
