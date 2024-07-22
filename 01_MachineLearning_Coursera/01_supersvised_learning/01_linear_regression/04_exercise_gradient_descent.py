@@ -57,6 +57,19 @@ def gradient_descent(x, y, w_0, b_0, alpha, num_iterations):
     return w_history, b_history, J_history
 
 
+def get_pearson(x, y):
+    x_mean = np.mean(x)
+    y_mean = np.mean(y)
+
+    sum_err_x2 = np.sum((x - x_mean) ** 2)
+    sum_err_y2 = np.sum((y - y_mean) ** 2)
+    sum_err_xy = np.sum((x - x_mean) * (y - y_mean))
+
+    pearson_cc = sum_err_xy / (sum_err_x2 * sum_err_y2) ** 0.5
+
+    return pearson_cc
+
+
 if __name__ == "__main__":
     x_train = []
     y_train = []
@@ -79,13 +92,15 @@ if __name__ == "__main__":
     x_train_array = np.array(x_train)
     y_train_array = np.array(y_train)
     y_prediction = w_hist[-1] * x_train_array + b_hist[-1]
-    err_mean = np.sum((y_train_array - np.mean(y_train_array) ** 2))
+    err_mean = np.sum((y_train_array - np.mean(y_train_array)) ** 2)
     err_pred = np.sum((y_train_array - y_prediction) ** 2)
     r_squared = 1 - err_pred / err_mean
+    pearson_cc = get_pearson(x_train, y_train)
+    print(f"Pearson correlation: {pearson_cc}")
     print(f"R-squared: {r_squared}")
 
     plt.scatter(x_train, y_train, color='blue')
     plt.plot(x_train_array, y_prediction, color='red')
     plt.xlabel('x_data')
     plt.ylabel('y_data')
-    plt.savefig('data.png')
+    plt.savefig('ex1p1_linear_regression.png')
